@@ -2,6 +2,6 @@ output "alb" {
   value = aws_lb.main
 }
 
-output "aws_lb_listener" {
+output "listener" {
   value = aws_lb_listener.main
 }
