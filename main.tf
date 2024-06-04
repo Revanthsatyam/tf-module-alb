@@ -9,8 +9,10 @@ resource "aws_lb" "main" {
 
 resource "aws_lb_listener" "main" {
   load_balancer_arn = aws_lb.main.arn
-  port              = 80
-  protocol          = "HTTP"
+  port              = var.internal ? 80 : 443
+  protocol          = var.internal ? "HTTP" : "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-east-1:590183653013:certificate/9a857988-9301-4a9b-a0e5-563a71682a30"
 
   default_action {
     type = "fixed-response"
